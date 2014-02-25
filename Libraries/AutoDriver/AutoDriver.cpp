@@ -24,9 +24,6 @@ AutoDriver::AutoDriver(int CSPin, int resetPin)
   SPIConfig();
 }
 
-
-
-
 void AutoDriver::SPIConfig()
 {
 
@@ -34,7 +31,7 @@ void AutoDriver::SPIConfig()
  int pinMISO = 12;
  int pinSCK = 13;
 
- //if board is Arduino Mega or one of its variants
+ //if board is Arduino Mega, Mega 2560 or Mega ADK
  #if defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)
 	pinMOSI = 51;
 	pinMISO = 50;
