@@ -24,11 +24,28 @@ AutoDriver::AutoDriver(int CSPin, int resetPin)
   SPIConfig();
 }
 
+
+
+
 void AutoDriver::SPIConfig()
 {
-  pinMode(11, OUTPUT); //MOSI
-  pinMode(12, INPUT);  //MISO
-  pinMode(13, OUTPUT); //SCK
+
+ int pinMOSI = 11;
+ int pinMISO = 12;
+ int pinSCK = 13;
+
+ //if board is Arduino Mega or one of its variants
+ #if defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)
+	pinMOSI = 51;
+	pinMISO = 50;
+	pinSCK = 52;
+ #endif
+
+ 
+  pinMode(pinMOSI, OUTPUT); //MOSI
+  pinMode(pinMISO, INPUT);  //MISO
+  pinMode(pinSCK, OUTPUT); //SCK
+  
   pinMode(_CSPin, OUTPUT);
   digitalWrite(_CSPin, HIGH);
   pinMode(_resetPin, OUTPUT);
@@ -56,6 +73,7 @@ void AutoDriver::SPIConfig()
   digitalWrite(_resetPin, HIGH);
   _delay_ms(5);
 }
+
 
 int AutoDriver::busyCheck(void)
 {
